@@ -43,6 +43,15 @@
 ; CHECK-O-NEXT: Running pass: EarlyCSEPass
 ; CHECK-O-NEXT: Running analysis: TargetLibraryAnalysis
 ; CHECK-O3-NEXT: Running pass: CallSiteSplittingPass
+; CHECK-O-NEXT: Running pass: InstCombinePass
+; CHECK-O-NEXT: Running analysis: LastRunTrackingAnalysis on foo
+; CHECK-O-NEXT: Running analysis: OptimizationRemarkEmitterAnalysis on foo
+; CHECK-O-NEXT: Running analysis: AAManager on foo
+; CHECK-O-NEXT: Running analysis: BasicAA on foo
+; CHECK-O-NEXT: Running analysis: ScopedNoAliasAA on foo
+; CHECK-O-NEXT: Running analysis: TypeBasedAA on foo
+; CHECK-O-NEXT: Running analysis: OuterAnalysisManagerProxy<llvm::AnalysisManager<llvm::Module>, llvm::Function> on foo
+; CHECK-O-NEXT: Running pass: SimplifyCFGPass
 ; CHECK-O-NEXT: Running pass: SampleProfileLoaderPass
 ; CHECK-O-NEXT: Running analysis: LazyCallGraphAnalysis
 ; CHECK-O-NEXT: Running analysis: ProfileSummaryAnalysis
@@ -53,17 +62,6 @@
 ; CHECK-O-NEXT: Running pass: GlobalOptPass
 ; CHECK-O-NEXT: Running pass: PromotePass
 ; CHECK-O-NEXT: Running pass: InstCombinePass
-; CHECK-O-NEXT: Running analysis: LastRunTrackingAnalysis
-; CHECK-O-NEXT: Running analysis: OptimizationRemarkEmitterAnalysis on foo
-; CHECK-O-NEXT: Running analysis: AAManager on foo
-; CHECK-O-NEXT: Running analysis: BasicAA
-; CHECK-O-NEXT: Running analysis: ScopedNoAliasAA
-; CHECK-O-NEXT: Running analysis: TypeBasedAA
-; CHECK-O-NEXT: Running analysis: OuterAnalysisManagerProxy
-; CHECK-O-NEXT: Running analysis: BlockFrequencyAnalysis on foo
-; CHECK-O-NEXT: Running analysis: BranchProbabilityAnalysis on foo
-; CHECK-O-NEXT: Running analysis: LoopAnalysis on foo
-; CHECK-O-NEXT: Running analysis: PostDominatorTreeAnalysis on foo
 ; CHECK-O-NEXT: Running pass: SimplifyCFGPass on foo
 ; CHECK-O-NEXT: Running pass: PGOForceFunctionAttrsPass
 ; CHECK-O-NEXT: Running pass: AlwaysInlinerPass
@@ -103,8 +101,10 @@
 ; CHECK-O-NEXT: Running pass: SimplifyCFGPass
 ; CHECK-O-NEXT: Running pass: ReassociatePass
 ; CHECK-O23SZ-NEXT: Running pass: ConstraintEliminationPass
+; CHECK-O1-NEXT: Running pass: LoopSimplifyPass on foo
+; CHECK-O-NEXT: Running analysis: LoopAnalysis on foo
 ; CHECK-O23SZ-NEXT: Running analysis: ScalarEvolutionAnalysis
-; CHECK-O-NEXT: Running pass: LoopSimplifyPass
+; CHECK-O23SZ-NEXT: Running pass: LoopSimplifyPass
 ; CHECK-O-NEXT: Running pass: LCSSAPass
 ; CHECK-O1-NEXT: Running analysis: ScalarEvolutionAnalysis
 ; CHECK-O-NEXT: Running analysis: InnerAnalysisManagerProxy
@@ -128,6 +128,7 @@
 ; CHECK-O23SZ-NEXT: Running pass: GVNPass
 ; CHECK-O23SZ-NEXT: Running analysis: MemoryDependenceAnalysis
 ; CHECK-O1-NEXT: Running pass: MemCpyOptPass
+; CHECK-O1-NEXT: Running analysis: PostDominatorTreeAnalysis on foo
 ; CHECK-O-NEXT: Running pass: SCCPPass
 ; CHECK-O-NEXT: Running pass: BDCEPass
 ; CHECK-O-NEXT: Running analysis: DemandedBitsAnalysis
@@ -138,6 +139,7 @@
 ; CHECK-O23SZ-NEXT: Invalidating analysis: LazyValueAnalysis
 ; CHECK-O1-NEXT: Running pass: CoroElidePass
 ; CHECK-O-NEXT: Running pass: ADCEPass
+; CHECK-O23SZ-NEXT: Running analysis: PostDominatorTreeAnalysis
 ; CHECK-O23SZ-NEXT: Running pass: MemCpyOptPass
 ; CHECK-O23SZ-NEXT: Running pass: DSEPass
 ; CHECK-O23SZ-NEXT: Running pass: MoveAutoInitPass on foo

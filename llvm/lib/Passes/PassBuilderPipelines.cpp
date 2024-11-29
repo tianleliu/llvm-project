@@ -1106,6 +1106,10 @@ PassBuilder::buildModuleSimplificationPipeline(OptimizationLevel Level,
     EarlyFPM.addPass(EarlyCSEPass());
     if (Level == OptimizationLevel::O3)
       EarlyFPM.addPass(CallSiteSplittingPass());
+    if (LoadSampleProfile) {
+      EarlyFPM.addPass(InstCombinePass());
+      EarlyFPM.addPass(SimplifyCFGPass());
+    }
     MPM.addPass(createModuleToFunctionPassAdaptor(
         std::move(EarlyFPM), PTO.EagerlyInvalidateAnalyses));
   }
